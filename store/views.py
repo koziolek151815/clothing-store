@@ -1,10 +1,14 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from store.data import cartData
 from store.forms import CreateUserForm
-from store.models import Customer
+from store.models import Customer, Product, Order, OrderItem
 
 
 def registerPage(request):
@@ -51,4 +55,48 @@ def index(request):
     if request.user.is_anonymous:
         return redirect('register')
     else:
-        return render(request, 'store.html', {})
+        data = cartData(request)
+
+        cartItems = data['cartItems']
+        products = Product.objects.all()
+        context = {'products': products, 'cartItems': cartItems}
+
+        return render(request, 'store.html', context)
+
+
+def cart(request):
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    return render(request, 'cart.html', context)
+
+
+def updateItem(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+
+    print('Action:', action)
+    print('Product:', productId)
+
+    customer = request.user.customer
+    product = Product.objects.get(id=productId)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+
+    orderItem.save()
+    print("added")
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+
+    return JsonResponse('Order updated',safe=False)
