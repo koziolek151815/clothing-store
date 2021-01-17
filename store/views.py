@@ -80,8 +80,6 @@ def updateItem(request):
     productId = data['productId']
     action = data['action']
 
-    print('Action:', action)
-    print('Product:', productId)
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
@@ -95,7 +93,7 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity - 1)
 
     orderItem.save()
-    print("added")
+
     if orderItem.quantity <= 0:
         orderItem.delete()
 
@@ -110,3 +108,20 @@ def processOrder(request):
     order.save()
 
     return redirect('store')
+
+def history(request):
+    customer = request.user.customer
+    orders = Order.objects.filter(customer = customer,complete = True)
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    return render(request, 'history.html', {"orders":orders,'cartItems': cartItems})
+
+
+def detail(request,order_id):
+    order = Order.objects.get(id=order_id)
+    allItems = order.orderitem_set.all()
+    print(allItems[0].product.name)
+    data = cartData(request)
+    cartItems = data['cartItems']
+    return render(request, 'detail.html', {"allItems":allItems,'cartItems': cartItems, "order":order})
