@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+    <table class="table">
+					<tr>
+						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+						<th><h5>Total:<strong> {{order.get_cart_total}}</strong></h5></th>
+						<th>
+                            {% if cartItems > 0 %}
+							 <a  class="btn btn-success" href="{% url 'process_order' %}">  Buy</a>
+                            {% endif %}
+						</th>
+					</tr>
+				</table>
+	<div class="row">
+		{% for item in items %}
+		    <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{item.product.imageURL}}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{item.product.name}}</h5>
+                    <p class="card-text">Price: {{item.product.price}} </p>
+                     <p class="card-text">Quantity: {{item.quantity}} </p>
+                        <p class="card-text">Total: {{item.get_total}} </p>
+                    <button data-product="{{item.product.id}}" data-action="add" class="btn btn-outline-secondary update-cart">Add one </button>
+                     <button data-product="{{item.product.id}}" data-action="remove" class="btn btn-outline-secondary update-cart">Delete one</button>
+
+                    </div>
+                </div>
+            </div>
+		{% endfor %}
+	</div>
+{% endblock content %}

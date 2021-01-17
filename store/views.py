@@ -100,3 +100,13 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Order updated',safe=False)
+
+
+def processOrder(request):
+
+    customer = request.user.customer
+    order = Order.objects.get(customer=customer, complete= False)
+    order.complete = True
+    order.save()
+
+    return redirect('store')
