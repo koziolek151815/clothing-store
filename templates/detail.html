@@ -4,6 +4,7 @@
 
     <table class="table">
         <tr>
+            <th><h5>Date order: <strong>{{order.date_ordered}}</strong></h5></th>
             <th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
             <th><h5>Total:<strong> {{order.get_cart_total}}</strong></h5></th>
         </tr>
@@ -13,7 +14,7 @@
 		{% for item in allItems %}
 		    <div class="col-sm-4">
                 <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{item.product.imageURL}}" alt="Card image cap">
+                <img class="card-img-top" src="{{item.product.imageURL}}" alt="Card image cap" width="250" height="250" >
                     <div class="card-body">
                     <h5 class="card-title">{{item.product.name}}</h5>
                     <p class="card-text">Price: {{item.product.price}} </p>

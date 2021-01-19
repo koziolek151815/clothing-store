@@ -6,12 +6,13 @@
 		{% for order in orders %}
 		    <div class="col-sm-4">
                 <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'pictures/cart.png' %}" alt="Card image cap">
+                <img class="card-img-top" src="{% static 'pictures/cart.png' %}" alt="Card image cap" width="100" height="100">
                     <div class="card-body">
-                    <h5 class="card-title">{{order.customer.name}}</h5>
+                    <h5 class="card-title"> {{order.date_ordered}}</h5>
                     <p class="card-text">Price: {{order.get_cart_total}} </p>
                         <p class="card-text">Items: {{order.get_cart_items}} </p>
-                    <a class="nav-link" href="{% url 'detail' order_id=order.id %}">Szczegóły zamówienia </a>
+                        <p class="card-text">Order status: {{order.status}} </p>
+                    <a class="nav-link" href="{% url 'detail' order_id=order.id %}">Order details </a>
                     </div>
                 </div>
             </div>

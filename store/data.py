@@ -16,12 +16,3 @@ def prepareCartData(request):
     return {'cartItems': cartItems, 'order': order, 'items': items}
 
 
-def cartData(request):
-
-    preparedData = prepareCartData(request)
-
-    cartItems = preparedData['cartItems']
-    order = preparedData['order']
-    items = preparedData['items']
-
-    return {'cartItems': cartItems, 'order': order, 'items': items}
