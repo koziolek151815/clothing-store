@@ -88,9 +88,12 @@ def updateItem(request):
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
+        product.instock = (product.instock - 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
+        product.instock = (product.instock + 1)
 
+    product.save()
     orderItem.save()
 
     if orderItem.quantity <= 0:
