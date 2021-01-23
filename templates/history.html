@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block content %}
+    {% if not orders %}
+    <h5>You did not have ordered anything yet</h5>
+    {% endif %}
 	<div class="row">
 		{% for order in orders %}
-		    <div class="col-sm-4">
+		    <div class="col-sm-3 m-3" >
                 <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{% static 'pictures/cart.png' %}" alt="Card image cap" width="100" height="100">
                     <div class="card-body">
@@ -12,7 +15,7 @@
                     <p class="card-text">Price: {{order.get_cart_total}} </p>
                         <p class="card-text">Items: {{order.get_cart_items}} </p>
                         <p class="card-text">Order status: {{order.status}} </p>
-                    <a class="nav-link" href="{% url 'detail' order_id=order.id %}">Order details </a>
+                    <a class="btn btn-success" href="{% url 'detail' order_id=order.id %}">Order details </a>
                     </div>
                 </div>
             </div>

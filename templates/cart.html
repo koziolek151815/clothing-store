@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-    <table class="table">
+    <table class="table table-bordered ">
 					<tr>
 						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
 						<th><h5>Total:<strong> {{order.get_cart_total}}</strong></h5></th>
@@ -16,7 +16,7 @@
 
 	<div class="row">
 		{% for item in items %}
-		    <div class="col-sm-4">
+		    <div class="col-sm-3 m-3">
                 <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{{item.product.imageURL}}" alt="Card image cap" width="250" height="250">
                     <div class="card-body">
@@ -26,9 +26,9 @@
                         <p class="card-text">Total: {{item.get_total}} </p>
                         <p class="card-text">In stock: {{item.product.instock}} </p>
                         {% if item.product.instock > 0 %}
-                    <button data-product="{{item.product.id}}" data-action="add" class="btn btn-outline-secondary update-cart">Add one </button>
+                    <button data-product="{{item.product.id}}" data-action="add" class="btn btn-success update-cart">Add one </button>
                         {% endif %}
-                     <button data-product="{{item.product.id}}" data-action="remove" class="btn btn-outline-secondary update-cart">Delete one</button>
+                     <button data-product="{{item.product.id}}" data-action="remove" class="btn btn-danger update-cart">Delete one</button>
 
                     </div>
                 </div>

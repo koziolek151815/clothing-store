@@ -4,7 +4,7 @@
 {% block content %}
 	<div class="row">
 		{% for product in products %}
-		    <div class="col-sm-4">
+		    <div class="col-sm-3 m-3">
                 <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{{product.imageURL}}" alt="Card image cap" width="250" height="250">
                     <div class="card-body">
@@ -12,7 +12,7 @@
                     <p class="card-text">Price: {{product.price}} </p>
                         <p class="card-text">In stock: {{product.instock}} </p>
                         {% if product.instock > 0 %}
-                    <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary update-cart">Add to Cart</button>
+                    <button data-product="{{product.id}}" data-action="add" class="btn btn-success update-cart">Add to Cart</button>
                         {% endif %}
                     </div>
                 </div>
