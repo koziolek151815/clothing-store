@@ -3,16 +3,16 @@
 {% block content %}
 
     <table class="table table-bordered ">
-					<tr>
-						<th style="text-align:center"><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
-						<th style="text-align:center"><h5>Total:<strong> {{order.get_cart_total}}</strong></h5></th>
-						<th style="text-align:center">
-                            {% if cartItems > 0 %}
-							 <a  class="btn btn-success" href="{% url 'process_order' %}">  Buy</a>
-                            {% endif %}
-						</th>
-					</tr>
-				</table>
+        <tr>
+            <th style="text-align:center"><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+            <th style="text-align:center"><h5>Total:<strong> {{order.get_cart_total}}</strong></h5></th>
+            <th style="text-align:center">
+                {% if cartItems > 0 %}
+                    <a  class="btn btn-success" href="{% url 'process_order' %}">  Buy</a>
+                {% endif %}
+            </th>
+        </tr>
+    </table>
 
 	<div class="row">
 		{% for item in items %}
