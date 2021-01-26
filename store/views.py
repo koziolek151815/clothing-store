@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from store.data import  prepareCartData
-from store.forms import CreateUserForm
+from store.forms import CreateUserForm, DeliveryForm
 from store.models import Customer, Product, Order, OrderItem
 
 
@@ -130,3 +130,28 @@ def detail(request,order_id):
     cartItems = data['cartItems']
 
     return render(request, 'detail.html', {"allItems":allItems,'cartItems': cartItems, "order":order})
+
+
+def delivery(request):
+    data= prepareCartData(request)
+    cartItems = data['cartItems']
+    if request.method == 'POST':
+        form = DeliveryForm(request.POST)
+        if form.is_valid():
+            delivery = form.save(commit=False)
+            order = Order.objects.get(customer = request.user.customer, complete = False)
+            delivery.order = order
+            delivery.save()
+            return redirect('process_order')
+    else:
+        form = DeliveryForm()
+
+    return render(request, 'delivery.html', {'form': form,'cartItems': cartItems})
+
+
+def deliveryHistory(request, order_id):
+    order = Order.objects.get(id=order_id)
+    delivery = order.delivery
+    data = prepareCartData(request)
+    cartItems = data['cartItems']
+    return render(request, 'delivery_detail.html', {'cartItems': cartItems, "delivery": delivery})

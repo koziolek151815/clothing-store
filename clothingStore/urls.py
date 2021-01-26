@@ -30,6 +30,8 @@ urlpatterns = [
     path('update_item/', views.updateItem, name="update_item"),
     path('process_order/', views.processOrder, name="process_order"),
     path('history/', views.history, name="history"),
-    path('detail/<int:order_id>/', views.detail, name="detail")
+    path('detail/<int:order_id>/', views.detail, name="detail"),
+    path('delivery/', views.delivery, name="delivery"),
+    path('delivery_history/<int:order_id>/', views.deliveryHistory, name="delivery_history"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

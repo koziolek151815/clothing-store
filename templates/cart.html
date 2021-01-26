@@ -8,7 +8,7 @@
             <th style="text-align:center"><h5>Total:<strong> {{order.get_cart_total}}</strong></h5></th>
             <th style="text-align:center">
                 {% if cartItems > 0 %}
-                    <a  class="btn btn-success" href="{% url 'process_order' %}">  Buy</a>
+                    <a  class="btn btn-success" href="{% url 'delivery' %}"> Delivery</a>
                 {% endif %}
             </th>
         </tr>

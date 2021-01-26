@@ -16,6 +16,9 @@
                         <p class="card-text">Items: {{order.get_cart_items}} </p>
                         <p class="card-text">Order status: {{order.status}} </p>
                     <a class="btn btn-success" href="{% url 'detail' order_id=order.id %}">Order details </a>
+                        <br>
+                        <br>
+                        <a class="btn btn-info" href="{% url 'delivery_history' order_id=order.id %}">Delivery details </a>
                     </div>
                 </div>
             </div>

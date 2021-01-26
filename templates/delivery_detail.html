@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <table class="table table-striped table-bordered">
+  <tr>
+    <td>Name:</td>
+    <td>{{ delivery.name }}</td>
+  </tr>
+  <tr>
+    <td>Surname:</td>
+    <td>{{ delivery.surname }}</td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td> {{ delivery.city }} </td>
+  </tr>
+    <tr>
+    <td>Phone:</td>
+    <td> {{ delivery.phone }} </td>
+  </tr>
+    <tr>
+    <td>Postal code:</td>
+    <td> {{ delivery.postal_code }} </td>
+  </tr>
+</table>
+{% endblock content %}

@@ -65,3 +65,11 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
+
+class Delivery(models.Model):
+    order = models.OneToOneField(Order, null=True, blank=True, on_delete=models.SET_NULL,default=None)
+    name = models.CharField(max_length=200, default="")
+    surname = models.CharField(max_length=200, default="")
+    city = models.CharField(max_length=200, default="")
+    phone = models.CharField(max_length=200, default="")
+    postal_code = models.CharField(max_length=200, default="")
